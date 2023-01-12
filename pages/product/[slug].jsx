@@ -8,8 +8,16 @@ import {
   Quantity,
   Buy,
 } from "../../styles/ProductDetails";
+import { useStateContent } from "../../lib/context";
+
+
+
 
 const ProductDetails = () => {
+
+
+  const { qty, increaseQty, decreaseQty } = useStateContent();
+
 
   // get the current page url slug
   const router = useRouter();
@@ -41,9 +49,9 @@ const ProductDetails = () => {
 
         <Quantity>
           <span>Quantity</span>
-          <button><AiFillMinusCircle /></button>
-          <p>0</p>
-          <button><AiFillPlusCircle /></button>
+          <button onClick={decreaseQty}><AiFillMinusCircle /></button>
+          <p>{qty}</p>
+          <button onClick={increaseQty}><AiFillPlusCircle /></button>
         </Quantity>
 
         <Buy>Add to Cart</Buy>
