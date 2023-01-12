@@ -4,6 +4,7 @@ import Product from '../components/Product'
 import { PRODUCT_QUERY } from '../lib/query'
 import { Gallery } from '../styles/Gallery'
 
+
 const Home = () => {
 
   // fetch the data from the collection type called 'Product' that was created in strapi
