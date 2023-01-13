@@ -15,9 +15,7 @@ import { useStateContent } from "../../lib/context";
 
 const ProductDetails = () => {
 
-
-  const { qty, increaseQty, decreaseQty } = useStateContent();
-
+  const { qty, increaseQty, decreaseQty, onAdd } = useStateContent();
 
   // get the current page url slug
   const router = useRouter();
@@ -54,10 +52,9 @@ const ProductDetails = () => {
           <button onClick={increaseQty}><AiFillPlusCircle /></button>
         </Quantity>
 
-        <Buy>Add to Cart</Buy>
+        <Buy onClick={() => onAdd(data.products.data[0].attributes, qty)}>Add to Cart</Buy>
 
       </ProductInfo>
-
 
     </DetailsStyle>
   )
