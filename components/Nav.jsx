@@ -3,6 +3,7 @@ import { FiShoppingBag } from 'react-icons/fi'
 import { NavStyles, NavItems } from '../styles/NavStyles'
 import Cart from "./Cart"
 import { useStateContent } from '../lib/context'
+const { AnimatePresence, motion } = require("framer-motion")
 
 const Nav = () => {
 
@@ -16,14 +17,17 @@ const Nav = () => {
       <NavItems>
 
         <div onClick={() => setShowCart(true)}>
-          {totalQuantites > 0 && <span>{totalQuantites}</span>}
+          {totalQuantites > 0 && <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} >{totalQuantites}</motion.span>}
           <FiShoppingBag />
           <h3>Cart</h3>
         </div>
 
       </NavItems>
 
-      {showCart && <Cart />}
+      {/* allows the Cart component to perform it's exist animation when it unmounts. The exit animation is written in the Cart component  */}
+      <AnimatePresence>
+        {showCart && <Cart />}
+      </AnimatePresence>
 
     </NavStyles>
   )

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-export const CartWrapper = styled.div`
+
+const { motion } = require("framer-motion"); // imports framer motion to be used
+
+// Please Note: in order to use framer motion with styled components change 'styled.div' to 'styled(motion.div)'
+
+
+export const CartWrapper = styled(motion.div)`
   position: fixed;
   right: 0;
   top: 0;
@@ -10,10 +16,9 @@ export const CartWrapper = styled.div`
   z-index: 100;
   display: flex;
   justify-content: flex-end;
-  /* display: none; */
 `;
 
-export const CartStyle = styled.div`
+export const CartStyle = styled(motion.div)`
   width: 30%;
   background: #f1f1f1;
   padding: 2rem 5rem;
@@ -21,7 +26,7 @@ export const CartStyle = styled.div`
   position: relative;
 `;
 
-export const Card = styled.div`
+export const Card = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,17 +41,15 @@ export const Card = styled.div`
   }
 `;
 
-export const CardInfo = styled.div`
+export const CardInfo = styled(motion.div)`
   width: 50%;
-
   div {
     display: flex;
     justify-content: space-between;
   }
-
 `;
 
-export const EmptyStyle = styled.div`
+export const EmptyStyle = styled(motion.div)`
   /* For the empty cart */
   position: absolute;
   top: 0;
@@ -57,15 +60,13 @@ export const EmptyStyle = styled.div`
   justify-content: center;
   height: 100%;
   width: 80%;
-
   svg {
     font-size: 8rem;
     color: var(--secondary);
   }
-
 `;
 
-export const Checkout = styled.div`
+export const Checkout = styled(motion.div)`
   button {
     background: var(--primary);
     padding: 1rem 2rem;
@@ -73,6 +74,9 @@ export const Checkout = styled.div`
     color: white;
     margin-top: 2rem;
     cursor: pointer;
-    border: none;
   }
 `;
+
+
+// used to allow the stagger effect when items are in the cart
+export const Cards = styled(motion.div)``;
