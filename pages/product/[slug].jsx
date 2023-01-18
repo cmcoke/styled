@@ -1,21 +1,21 @@
+import { useEffect } from "react";
 import { useQuery } from "urql"
 import { GET_PRODUCT_QUERY } from "../../lib/query"
 import { useRouter } from "next/router"
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
-import {
-  DetailsStyle,
-  ProductInfo,
-  Quantity,
-  Buy,
-} from "../../styles/ProductDetails";
+import { DetailsStyle, ProductInfo, Quantity, Buy } from "../../styles/ProductDetails";
 import { useStateContent } from "../../lib/context";
-
-
+import toast from 'react-hot-toast'
 
 
 const ProductDetails = () => {
 
-  const { qty, increaseQty, decreaseQty, onAdd } = useStateContent();
+  const { qty, setQty, increaseQty, decreaseQty, onAdd } = useStateContent();
+
+  // reset the value of qty to 1 whenever this page (a specific product page) renders
+  useEffect(() => {
+    setQty(1)
+  }, [])
 
   // get the current page url slug
   const router = useRouter();
@@ -35,6 +35,11 @@ const ProductDetails = () => {
   // extract data
   const { title, description, image } = data.products.data[0].attributes;
 
+  // display a pop up message whenever a product has been added to the cart
+  const notify = () => {
+    toast.success(`${title} added to your cart`, { duration: 1500 });
+  }
+
   return (
     <DetailsStyle>
 
@@ -52,7 +57,12 @@ const ProductDetails = () => {
           <button onClick={increaseQty}><AiFillPlusCircle /></button>
         </Quantity>
 
-        <Buy onClick={() => onAdd(data.products.data[0].attributes, qty)}>Add to Cart</Buy>
+        <Buy onClick={() => {
+          onAdd(data.products.data[0].attributes, qty)
+          notify();
+        }}>
+          Add to Cart
+        </Buy>
 
       </ProductInfo>
 
